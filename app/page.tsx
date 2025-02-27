@@ -14,19 +14,26 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Työmaa-assistentti</h2>
             <p className="max-w-2xl mx-auto text-gray-600 dark:text-gray-300 mb-8">
-              Kokeile työmaa-assistenttiamme, joka auttaa sinua hallitsemaan projektejasi ja automatisoimaan työnkulkujasi.
+              Proovi meie tööplatsi assistenti, mis aitab sul hallata projekte ja automatiseerida töövooge.
             </p>
             
             <Link 
               href="/chat"
               className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-all inline-block"
             >
-              Kokeile chat-assistenttia
+              Proovi chat-assistenti
             </Link>
           </div>
           
           {/* Demo chat widget */}
-          <VoiceflowChat />
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-blue-50 p-4 rounded-lg mb-8 text-center">
+              <p className="text-blue-700 font-medium">
+                Demo versioon - täisfunktsionaalsuse jaoks mine <Link href="/chat" className="text-blue-600 underline">chat lehele</Link>
+              </p>
+            </div>
+            <VoiceflowChat />
+          </div>
         </div>
       </section>
       <CTASection />

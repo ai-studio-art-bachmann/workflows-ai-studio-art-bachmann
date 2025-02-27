@@ -1,0 +1,33 @@
+{
+  "posts": [
+    {
+      "id": "blog-001",
+      "slug": "ehitustoostuse-tulevik",
+      "title": "Ehitustööstuse tulevik: Kuidas AI muudab ehitusplatside tööd",
+      "excerpt": "Uurime, kuidas tehisintellekt ja automatiseerimine on muutmas ehitustööstust ning millised on tulevikutrendid, mis mõjutavad töömeetodeid ja efektiivsust.",
+      "coverImage": "/images/blog/ai-construction.jpg",
+      "date": "2025-02-27T10:00:00Z",
+      "author": {
+        "name": "Mati Tamm",
+        "image": "/images/authors/mati-tamm.jpg"
+      },
+      "tags": ["Tehisintellekt", "Ehitus", "Innovatsioon", "Tulevikutrendid"],
+      "readingTime": "8 min lugemist"
+    },
+    {
+      "id": "blog-002",
+      "slug": "rohelised-ehitusmaterjalid",
+      "title": "Rohelised ehitusmaterjalid: Jätkusuutliku ehituse tulevik",
+      "excerpt": "Tutvustame innovaatilisi ja keskkonnasõbralikke ehitusmaterjale, mis aitavad vähendada ehitustööstuse keskkonnajalajälge ja luua jätkusuutlikumaid hooneid.",
+      "coverImage": "/images/blog/green-materials.jpg",
+      "date": "2025-02-25T14:30:00Z",
+      "author": {
+        "name": "Liisa Kask",
+        "image": "/images/authors/liisa-kask.jpg"
+      },
+      "tags": ["Jätkusuutlikkus", "Ehitusmaterjalid", "Roheline ehitus", "Innovatsioon"],
+      "readingTime": "7 min lugemist"
+    }
+  ],
+  "totalPosts": 2
+}

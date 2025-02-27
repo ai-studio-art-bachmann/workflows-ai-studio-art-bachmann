@@ -11,6 +11,15 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const navigation = [
+    { name: 'Etusivu', href: '/' },
+    { name: 'Palvelut', href: '/palvelut' },
+    { name: 'Chat-assistentti', href: '/chat' },
+    { name: 'Blogi', href: '/blog' },
+    { name: 'Yhteystiedot', href: '/yhteystiedot' },
+    { name: 'Test', href: '/test' },
+  ];
+
   return (
     <header className="relative bg-white shadow-sm dark:bg-dark">
       <div className="container flex items-center justify-between h-20">
@@ -20,18 +29,15 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex md:items-center md:space-x-8">
-          <Link href="/" className="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">
-            Etusivu
-          </Link>
-          <Link href="/palvelut" className="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">
-            Palvelut
-          </Link>
-          <Link href="/chat" className="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">
-            Chat-assistentti
-          </Link>
-          <Link href="/yhteystiedot" className="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">
-            Yhteystiedot
-          </Link>
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400"
+            >
+              {item.name}
+            </Link>
+          ))}
           <Link href="/yhteystiedot" className="btn btn-primary">
             Ota yhteyttä
           </Link>
@@ -61,34 +67,16 @@ const Header = () => {
       {isMenuOpen && (
         <div className="absolute z-10 w-full bg-white shadow-lg md:hidden dark:bg-dark">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link
-              href="/"
-              className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:text-primary-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-primary-400 dark:hover:bg-gray-800"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Etusivu
-            </Link>
-            <Link
-              href="/palvelut"
-              className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:text-primary-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-primary-400 dark:hover:bg-gray-800"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Palvelut
-            </Link>
-            <Link
-              href="/chat"
-              className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:text-primary-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-primary-400 dark:hover:bg-gray-800"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Chat-assistentti
-            </Link>
-            <Link
-              href="/yhteystiedot"
-              className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:text-primary-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-primary-400 dark:hover:bg-gray-800"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Yhteystiedot
-            </Link>
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:text-primary-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-primary-400 dark:hover:bg-gray-800"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
             <Link
               href="/yhteystiedot"
               className="block px-3 py-2 text-base font-medium text-white bg-primary-600 rounded-md hover:bg-primary-700"

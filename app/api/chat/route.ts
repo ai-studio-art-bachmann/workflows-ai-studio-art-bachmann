@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // N8N webhook URL
-const N8N_WEBHOOK_URL = "https://joosep.app.n8n.cloud/webhook-test/2e6d9caa-dde9-4d59-8a61-368fa1d89ab4";
+const N8N_WEBHOOK_URL = "https://joosep.app.n8n.cloud/webhook-test/chat-webhook";
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,35 +16,71 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Forward the message to n8n
-    const n8nResponse = await fetch(N8N_WEBHOOK_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        message,
-        user: "guest@example.com", // Default guest user
-        timestamp: new Date().toISOString(),
-      }),
-    });
+    console.log("API received message:", message);
 
-    if (!n8nResponse.ok) {
-      console.error("N8N Error:", await n8nResponse.text());
-      return NextResponse.json(
-        { error: "Error communicating with workflow service" },
-        { status: 502 }
-      );
+    // Test ping message - kohe vastus
+    if (message === "ping") {
+      return NextResponse.json({ response: "pong" });
     }
 
-    // Return the n8n response
-    const data = await n8nResponse.json();
-    return NextResponse.json(data);
+    // Forward the message to n8n
+    console.log("Forwarding to n8n:", N8N_WEBHOOK_URL);
+    try {
+      const n8nResponse = await fetch(N8N_WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message,
+          user: "guest@example.com", // Default guest user
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      console.log("N8N response status:", n8nResponse.status);
+
+      if (!n8nResponse.ok) {
+        const errorText = await n8nResponse.text();
+        console.error("N8N Error:", errorText);
+        return NextResponse.json(
+          { response: "Ei saanud ühendust töövoo serveriga. Proovige hiljem uuesti." },
+          { status: 200 } // Saadame 200 OK, et vältida kliendi viga
+        );
+      }
+
+      // Return the n8n response
+      try {
+        const data = await n8nResponse.json();
+        console.log("N8N response data:", data);
+        return NextResponse.json(data);
+      } catch (parseError) {
+        console.error("Failed to parse N8N response:", parseError);
+        
+        // Kui JSON parse ebaõnnestub, proovime teksti tagastada
+        try {
+          const text = await n8nResponse.text();
+          console.log("N8N response text:", text);
+          return NextResponse.json({ response: text || "Töövoog vastas, kuid vastust ei saanud töödelda." });
+        } catch (textError) {
+          console.error("Failed to get response text:", textError);
+          return NextResponse.json({ 
+            response: "Työntekijä-assistentti on vastaanottanut viestisi, mutta ei pysty tällä hetkellä vastaamaan."
+          });
+        }
+      }
+    } catch (n8nError) {
+      console.error("N8N fetch error:", n8nError);
+      return NextResponse.json(
+        { response: "Ei saanud ühendust töövoo serveriga. Proovige hiljem uuesti." },
+        { status: 200 } // Saadame 200 OK, et vältida kliendi viga
+      );
+    }
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
+      { response: "Palvelun käsittelyssä ilmeni virhe. Yritä myöhemmin uudelleen." },
+      { status: 200 } // Saadame 200 OK, et vältida kliendi viga
     );
   }
 }
