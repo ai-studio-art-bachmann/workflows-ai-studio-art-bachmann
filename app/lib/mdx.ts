@@ -39,7 +39,24 @@ export function getBlogSlugs(): string[] {
       const files = fs.readdirSync(BLOG_DIR);
       return files
         .filter(file => file.endsWith('.mdx') || file.endsWith('.md'))
-        .map(file => file.replace(/\.mdx?$/, ''));
+        .map(file => {
+          // Proovime lugeda faili sisu, et saada slug frontmatter'ist
+          try {
+            const filePath = path.join(BLOG_DIR, file);
+            const fileContent = fs.readFileSync(filePath, 'utf8');
+            const { data } = matter(fileContent);
+            
+            // Kui frontmatter'is on slug, siis kasutame seda
+            if (data.slug) {
+              return data.slug;
+            }
+          } catch (error) {
+            console.error(`Error reading slug from file ${file}:`, error);
+          }
+          
+          // Kui frontmatter'is ei ole slug'i või tekkis viga, siis kasutame faili nime
+          return file.replace(/\.mdx?$/, '');
+        });
     } catch (error) {
       console.error('Error reading blog directory:', error);
       return [];
@@ -76,7 +93,55 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost> {
   // Kasutame Node.js fs moodulit ainult serveripoolses koodis
   if (typeof window === 'undefined') {
     try {
-      const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
+      // Proovime leida faili otse slugi järgi
+      let filePath = path.join(BLOG_DIR, `${slug}.mdx`);
+      
+      // Kui fail ei eksisteeri, proovime leida kõik failid ja otsida õige
+      if (!fs.existsSync(filePath)) {
+        const files = fs.readdirSync(BLOG_DIR);
+        
+        // Kõigepealt proovime leida faili, mille slug frontmatter'is vastab otsitavale
+        let matchingFile = null;
+        
+        for (const file of files) {
+          try {
+            const currentFilePath = path.join(BLOG_DIR, file);
+            const fileContent = fs.readFileSync(currentFilePath, 'utf8');
+            const { data } = matter(fileContent);
+            
+            if (data.slug === slug) {
+              matchingFile = file;
+              break;
+            }
+          } catch (error) {
+            console.error(`Error checking slug in file ${file}:`, error);
+          }
+        }
+        
+        // Kui slug'i järgi ei leidnud, proovime faili nime järgi
+        if (!matchingFile) {
+          matchingFile = files.find(file => 
+            file.toLowerCase().replace(/\.mdx?$/, '') === slug.toLowerCase()
+          );
+        }
+        
+        if (matchingFile) {
+          filePath = path.join(BLOG_DIR, matchingFile);
+        } else {
+          // Kui ikka ei leia, proovime URL-dekodeeritud slugi
+          const decodedSlug = decodeURIComponent(slug);
+          matchingFile = files.find(file => 
+            file.toLowerCase().replace(/\.mdx?$/, '') === decodedSlug.toLowerCase()
+          );
+          
+          if (matchingFile) {
+            filePath = path.join(BLOG_DIR, matchingFile);
+          } else {
+            throw new Error(`Blog post with slug ${slug} not found`);
+          }
+        }
+      }
+      
       const fileContent = fs.readFileSync(filePath, 'utf8');
       
       // Eralda frontmatter ja sisu
@@ -85,18 +150,23 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost> {
       // Arvuta lugemisaeg
       const readingTime = calculateReadingTime(content);
       
+      // Määra vaikeväärtused puuduvatele väljadele
+      const excerpt = data.excerpt || content.substring(0, 160) + '...';
+      const tags = data.tags || [];
+      const author = {
+        name: data.author?.name || 'Autor',
+        image: data.author?.image || '/images/authors/default.jpg',
+      };
+      
       return {
-        slug,
-        title: data.title,
-        excerpt: data.excerpt,
-        date: data.date,
+        slug: data.slug || slug,
+        title: data.title || 'Pealkiri puudub',
+        excerpt,
+        date: data.date || new Date().toISOString(),
         content: content,
         coverImage: data.coverImage || '/images/blog/default-cover.jpg',
-        author: {
-          name: data.author.name,
-          image: data.author.image || '/images/authors/default.jpg',
-        },
-        tags: data.tags || [],
+        author,
+        tags,
         readingTime,
       };
     } catch (error) {

@@ -1,0 +1,225 @@
+/* 
+ * Blog Typography Styles
+ * Eraldi CSS fail, mis sisaldab kõiki blogi tüpograafia stiile
+ * Neid stiile saab kasutada kõigis blogi komponentides
+ */
+
+/* Pealkirjad */
+.blog-h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 2rem 0 1.25rem;
+  color: #1a202c;
+  line-height: 1.3;
+}
+
+.blog-h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 1.75rem 0 1rem;
+  color: #1a202c;
+  line-height: 1.3;
+}
+
+.blog-h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.875rem;
+  color: #1a202c;
+  line-height: 1.3;
+}
+
+.blog-h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.75rem;
+  color: #1a202c;
+  line-height: 1.3;
+}
+
+/* Tekst */
+.blog-text {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #2d3748;
+  margin-bottom: 1.25rem;
+}
+
+/* Lingid */
+.blog-link {
+  color: #3182ce;
+  text-decoration: underline;
+}
+
+.blog-link:hover {
+  text-decoration: none;
+}
+
+/* Loendid */
+.blog-list {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.blog-list-item {
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+}
+
+/* Tsitaadid */
+.blog-blockquote {
+  border-left: 4px solid #3182ce;
+  padding: 1rem 1.5rem;
+  font-style: italic;
+  margin: 1.5rem 0;
+  color: #4a5568;
+  background-color: #f7fafc;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* Horisontaalne joon */
+.blog-hr {
+  height: 1px;
+  background-color: #e2e8f0;
+  border: none;
+  margin: 2rem 0;
+}
+
+/* Kood */
+.blog-code {
+  font-family: monospace;
+  background-color: #f7fafc;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  color: #2d3748;
+}
+
+.blog-pre {
+  background-color: #f7fafc;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+/* Pildid */
+.blog-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Tabelid */
+.blog-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.blog-table th {
+  background-color: #f7fafc;
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.blog-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.blog-table tr:hover {
+  background-color: #f7fafc;
+}
+
+/* Märkused ja hoiatused */
+.blog-note {
+  background-color: #ebf8ff;
+  border-left: 4px solid #4299e1;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.blog-warning {
+  background-color: #fffaf0;
+  border-left: 4px solid #ed8936;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* Autorid ja metaandmed */
+.blog-author {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.blog-author-image {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+.blog-author-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-author-name {
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.blog-date {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+/* Tagid */
+.blog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.blog-tag {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  border-radius: 9999px;
+  background-color: #edf2f7;
+  color: #4a5568;
+  transition: all 0.2s ease;
+}
+
+.blog-tag:hover {
+  background-color: #e2e8f0;
+  color: #2d3748;
+}
+
+/* Nupud */
+.blog-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4a5568;
+  transition: all 0.2s ease;
+}
+
+.blog-button:hover {
+  color: #1a202c;
+}
+
+.blog-button-icon {
+  margin-right: 0.5rem;
+}

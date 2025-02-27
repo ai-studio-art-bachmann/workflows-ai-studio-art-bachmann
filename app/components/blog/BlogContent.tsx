@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { BlogPost, getCompiledMDX } from '@/app/lib/mdx';
 import styles from '@/app/styles/blog.module.css';
-import ReactMarkdown from 'react-markdown';
+import '@/app/styles/blog-typography.css';
 
 interface BlogContentProps {
   post: BlogPost;
@@ -11,8 +11,25 @@ export default async function BlogContent({ post }: BlogContentProps) {
   // Kompileeri MDX sisu
   const content = await getCompiledMDX(post.content);
 
-  // Formaadi kuupäev
-  const formattedDate = new Date(post.date).toLocaleDateString('et-EE', {
+  // Kui sisu puudub, näita veateadet
+  if (!content) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 md:p-12 lg:p-16 max-w-5xl mx-auto">
+          <h1 className="text-3xl font-bold text-red-600 mb-4">Viga sisu laadimisel</h1>
+          <p className="text-lg">Kahjuks ei õnnestunud blogi sisu laadida. Palun proovige hiljem uuesti.</p>
+          <Link href="/blog" className="inline-block mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+            Tagasi blogisse
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Formateeri kuupäev vastavalt keelele
+  const isFinish = post.title.includes('Teknologiset') || post.title.toLowerCase().includes('rakennusala');
+  const locale = isFinish ? 'fi-FI' : 'et-EE';
+  const formattedDate = new Date(post.date).toLocaleDateString(locale, {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
@@ -37,30 +54,23 @@ export default async function BlogContent({ post }: BlogContentProps) {
           </header>
           
           <div className={styles.blogBody}>
-            <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-img:rounded-xl prose-img:shadow-md
-              prose-h1:text-3xl prose-h1:mt-10 prose-h1:mb-6
-              prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
-              prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
-              prose-p:text-gray-700 prose-p:dark:text-gray-300 prose-p:leading-relaxed prose-p:my-6
-              prose-li:my-2 prose-li:text-gray-700 prose-li:dark:text-gray-300
-              prose-strong:text-gray-900 prose-strong:dark:text-white
-            ">
-              {content}
-            </div>
+            {content}
           </div>
           
           <footer className={styles.blogFooter}>
-            <div className={styles.tags}>
-              {post.tags.map((tag) => (
-                <Link 
-                  href={`/blog/tag/${encodeURIComponent(tag.toLowerCase())}`} 
-                  key={tag} 
-                  className={styles.tag}
-                >
-                  {tag}
-                </Link>
-              ))}
-            </div>
+            {post.tags && post.tags.length > 0 && (
+              <div className={styles.tags}>
+                {post.tags.map((tag) => (
+                  <Link 
+                    href={`/blog/tag/${encodeURIComponent(tag.toLowerCase())}`} 
+                    key={tag} 
+                    className={styles.tag}
+                  >
+                    {tag}
+                  </Link>
+                ))}
+              </div>
+            )}
             
             <Link href="/blog" className={styles.backButton}>
               <svg 
@@ -77,7 +87,7 @@ export default async function BlogContent({ post }: BlogContentProps) {
               >
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
               </svg>
-              Tagasi blogisse
+              {locale === 'fi-FI' ? 'Takaisin blogiin' : 'Tagasi blogisse'}
             </Link>
           </footer>
         </article>
