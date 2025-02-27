@@ -26,6 +26,9 @@ const Header = () => {
           <Link href="/palvelut" className="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">
             Palvelut
           </Link>
+          <Link href="/chat" className="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">
+            Chat-assistentti
+          </Link>
           <Link href="/yhteystiedot" className="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">
             Yhteystiedot
           </Link>
@@ -71,6 +74,13 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Palvelut
+            </Link>
+            <Link
+              href="/chat"
+              className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:text-primary-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-primary-400 dark:hover:bg-gray-800"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Chat-assistentti
             </Link>
             <Link
               href="/yhteystiedot"
