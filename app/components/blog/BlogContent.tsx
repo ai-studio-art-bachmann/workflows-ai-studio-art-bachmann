@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { BlogPost, getCompiledMDX } from '@/app/lib/mdx';
+import PageHero from '@/app/components/common/PageHero';
 import styles from '@/app/styles/blog.module.css';
 import '@/app/styles/blog-typography.css';
 
@@ -36,12 +38,15 @@ export default async function BlogContent({ post }: BlogContentProps) {
   });
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 md:p-12 lg:p-16 max-w-5xl mx-auto">
-        <article className={styles.blogContent}>
-          <header className={styles.blogHeader}>
-            <h1 className={styles.blogTitle}>{post.title}</h1>
-            
+    <>
+      <PageHero 
+        title={post.title}
+        description={post.excerpt || ''}
+      />
+      
+      <div className="container mx-auto px-4 py-12">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 md:p-12 lg:p-16 max-w-5xl mx-auto">
+          <article className={styles.blogContent}>
             <div className={styles.blogMeta}>
               <div className={styles.authorInfo}>
                 <span className={styles.authorName}>{post.author.name}</span>
@@ -50,48 +55,42 @@ export default async function BlogContent({ post }: BlogContentProps) {
                   {post.readingTime && ` · ${post.readingTime}`}
                 </span>
               </div>
+              
+              {post.tags && post.tags.length > 0 && (
+                <div className={styles.blogTags}>
+                  {post.tags.map(tag => (
+                    <Link key={tag} href={`/blog/tag/${tag}`} className={styles.blogTag}>
+                      {tag}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
-          </header>
-          
-          <div className={styles.blogBody}>
-            {content}
-          </div>
-          
-          <footer className={styles.blogFooter}>
-            {post.tags && post.tags.length > 0 && (
-              <div className={styles.tags}>
-                {post.tags.map((tag) => (
-                  <Link 
-                    href={`/blog/tag/${encodeURIComponent(tag.toLowerCase())}`} 
-                    key={tag} 
-                    className={styles.tag}
-                  >
-                    {tag}
-                  </Link>
-                ))}
+            
+            {post.coverImage && (
+              <div className={styles.blogCoverImage}>
+                <Image 
+                  src={post.coverImage} 
+                  alt={post.title} 
+                  width={1200} 
+                  height={630} 
+                  className="rounded-lg"
+                />
               </div>
             )}
             
-            <Link href="/blog" className={styles.backButton}>
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className={styles.backIcon}
-                width="20" 
-                height="20" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              >
-                <path d="M19 12H5M12 19l-7-7 7-7"/>
-              </svg>
-              {locale === 'fi-FI' ? 'Takaisin blogiin' : 'Tagasi blogisse'}
+            <div className={styles.blogBody}>
+              {content}
+            </div>
+          </article>
+          
+          <div className={styles.blogFooter}>
+            <Link href="/blog" className="button">
+              ← Tagasi blogisse
             </Link>
-          </footer>
-        </article>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -15,16 +15,16 @@ const Header = () => {
     { name: 'Etusivu', href: '/' },
     { name: 'Palvelut', href: '/palvelut' },
     { name: 'Chat-assistentti', href: '/chat' },
-    { name: 'Blogi', href: '/blog' },
+    { name: 'Blogi', href: 'https://testing-1.ai-studio-art-bachmann.fi' },
     { name: 'Yhteystiedot', href: '/yhteystiedot' },
     { name: 'Test', href: '/test' },
   ];
 
   return (
-    <header className="relative bg-white shadow-sm dark:bg-dark">
+    <header className="relative header-bg shadow-md">
       <div className="container flex items-center justify-between h-20">
         <Link href="/" className="flex items-center">
-          <span className="text-2xl font-bold text-primary-600">AI Studio Art Bachmann</span>
+          <span className="text-2xl font-bold text-white">AI Studio Art Bachmann</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -33,12 +33,12 @@ const Header = () => {
             <Link
               key={item.name}
               href={item.href}
-              className="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400"
+              className="header-link"
             >
               {item.name}
             </Link>
           ))}
-          <Link href="/yhteystiedot" className="btn btn-primary">
+          <Link href="/yhteystiedot" className="bg-[#d66204] text-white hover:bg-[#c05a04] transition-colors px-4 py-2 rounded-md" style={{ fontSize: '1.5rem' }}>
             Ota yhteyttä
           </Link>
         </nav>
@@ -46,7 +46,7 @@ const Header = () => {
         {/* Mobile Menu Button */}
         <button
           type="button"
-          className="inline-flex items-center justify-center p-2 text-gray-700 rounded-md md:hidden hover:text-primary-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-primary-400 dark:hover:bg-gray-800"
+          className="inline-flex items-center justify-center p-2 text-white rounded-md md:hidden hover:text-gray-200 hover:bg-opacity-75"
           onClick={toggleMenu}
           aria-expanded={isMenuOpen}
         >
@@ -65,13 +65,13 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="absolute z-10 w-full bg-white shadow-lg md:hidden dark:bg-dark">
+        <div className="absolute z-10 w-full header-bg shadow-lg md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:text-primary-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-primary-400 dark:hover:bg-gray-800"
+                className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-gray-200 hover:bg-opacity-75"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
@@ -79,7 +79,8 @@ const Header = () => {
             ))}
             <Link
               href="/yhteystiedot"
-              className="block px-3 py-2 text-base font-medium text-white bg-primary-600 rounded-md hover:bg-primary-700"
+              className="block px-3 py-2 text-base font-medium text-white bg-[#d66204] hover:bg-[#c05a04] rounded-md" 
+              style={{ fontSize: '1.5rem' }}
               onClick={() => setIsMenuOpen(false)}
             >
               Ota yhteyttä

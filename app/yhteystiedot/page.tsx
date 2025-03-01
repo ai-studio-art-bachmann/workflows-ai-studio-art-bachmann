@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import PageHero from "@/app/components/common/PageHero";
 
 export const metadata: Metadata = {
   title: "Yhteystiedot | AI Studio Art Bachmann",
@@ -11,16 +12,10 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="bg-gradient-to-r from-primary-900 to-secondary-900 text-white py-16 md:py-24">
-        <div className="container">
-          <div className="max-w-3xl">
-            <h1 className="mb-6">Yhteystiedot</h1>
-            <p className="text-lg md:text-xl text-gray-200">
-              Ota yhteyttä meihin ja keskustellaan, miten voimme auttaa rakennusyritystäsi hyödyntämään tekoälyn mahdollisuuksia.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero 
+        title="Yhteystiedot"
+        description="Ota yhteyttä meihin ja keskustellaan, miten voimme auttaa rakennusyritystäsi hyödyntämään tekoälyn mahdollisuuksia."
+      />
 
       <section className="py-16 md:py-24 bg-white dark:bg-gray-800">
         <div className="container">
@@ -50,7 +45,7 @@ export default function ContactPage() {
                     </svg>
                     <div>
                       <p className="font-medium">Sähköposti</p>
-                      <p className="text-gray-600 dark:text-gray-300">info@aistudioart.fi</p>
+                      <p className="text-gray-600 dark:text-gray-300">info@aistudioartbachmann.fi</p>
                     </div>
                   </div>
                   
@@ -61,33 +56,22 @@ export default function ContactPage() {
                     </svg>
                     <div>
                       <p className="font-medium">Osoite</p>
-                      <p className="text-gray-600 dark:text-gray-300">
-                        Tekoälykatu 123<br />
-                        00100 Helsinki
-                      </p>
+                      <p className="text-gray-600 dark:text-gray-300">Tekoälykatu 123, 00100 Helsinki</p>
                     </div>
                   </div>
                 </div>
               </div>
-              
-              <div>
-                <h3 className="text-xl font-bold mb-4">Toimistoajat</h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Maanantai - Perjantai: 9:00 - 17:00<br />
-                  Lauantai - Sunnuntai: Suljettu
-                </p>
-              </div>
             </div>
             
             <div>
-              <form className="bg-gray-50 dark:bg-gray-700 p-8 rounded-lg">
+              <form className="bg-gray-50 dark:bg-gray-700 p-8 rounded-lg shadow-md">
                 <div className="mb-6">
                   <label htmlFor="name" className="block mb-2 font-medium">Nimi</label>
                   <input 
                     type="text" 
                     id="name" 
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white" 
-                    placeholder="Etunimi Sukunimi"
+                    placeholder="Nimesi"
                     required
                   />
                 </div>
@@ -98,28 +82,19 @@ export default function ContactPage() {
                     type="email" 
                     id="email" 
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white" 
-                    placeholder="esimerkki@yritys.fi"
+                    placeholder="sahkoposti@esimerkki.fi"
                     required
                   />
                 </div>
                 
                 <div className="mb-6">
-                  <label htmlFor="phone" className="block mb-2 font-medium">Puhelinnumero</label>
-                  <input 
-                    type="tel" 
-                    id="phone" 
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white" 
-                    placeholder="+358 50 123 4567"
-                  />
-                </div>
-                
-                <div className="mb-6">
-                  <label htmlFor="company" className="block mb-2 font-medium">Yritys</label>
+                  <label htmlFor="subject" className="block mb-2 font-medium">Aihe</label>
                   <input 
                     type="text" 
-                    id="company" 
+                    id="subject" 
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white" 
-                    placeholder="Yrityksesi nimi"
+                    placeholder="Aihe"
+                    required
                   />
                 </div>
                 
@@ -129,17 +104,12 @@ export default function ContactPage() {
                     id="message" 
                     rows={5} 
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white" 
-                    placeholder="Kerro lyhyesti, miten voimme auttaa sinua"
+                    placeholder="Kirjoita viestisi tähän..."
                     required
                   ></textarea>
                 </div>
                 
-                <button 
-                  type="submit" 
-                  className="btn btn-primary w-full"
-                >
-                  Lähetä viesti
-                </button>
+                <button type="submit" className="button w-full">Lähetä viesti</button>
               </form>
             </div>
           </div>

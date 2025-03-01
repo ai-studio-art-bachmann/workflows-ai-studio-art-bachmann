@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // N8N webhook URL
-const N8N_WEBHOOK_URL = "https://joosep.app.n8n.cloud/webhook-test/chat-webhook";
+const N8N_WEBHOOK_URL = "https://joosep.app.n8n.cloud/webhook/chat-webhook";
 
 export async function POST(req: NextRequest) {
   try {

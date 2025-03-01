@@ -13,17 +13,17 @@ module.exports = {
       },
       colors: {
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+          50: '#f5f2f2',
+          100: '#e8e0e0',
+          200: '#d1c2c2',
+          300: '#b9a3a3',
+          400: '#a28585',
+          500: '#8b6767',
+          600: '#1a2e36',
+          700: '#152329',
+          800: '#0f1a1e',
+          900: '#0a1114',
+          950: '#050809',
         },
         secondary: {
           50: '#f5f3ff',
@@ -59,6 +59,20 @@ module.exports = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            fontSize: '1rem',
+            color: '#2d3748',
+            a: {
+              color: '#3a0f0f',
+              '&:hover': {
+                color: '#5d2c2c',
+              },
+            },
+          },
+        },
       },
     },
   },

@@ -14,8 +14,8 @@
   margin-bottom: 2rem;
   border-radius: 1rem;
   overflow: hidden;
-  background-color: #f8f9fa;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: #f5f2f2;
+  box-shadow: 0 4px 20px rgba(58, 15, 15, 0.1);
 }
 
 @media (min-width: 768px) {
@@ -41,13 +41,14 @@
   font-size: 1.75rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #1a202c;
+  color: #3a0f0f;
 }
 
 .featuredExcerpt {
   color: #4a5568;
   margin-bottom: 1.5rem;
   line-height: 1.6;
+  font-size: 1rem;
 }
 
 /* Blog card styles */
@@ -57,14 +58,14 @@
   border-radius: 0.75rem;
   overflow: hidden;
   background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px rgba(58, 15, 15, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(58, 15, 15, 0.1);
 }
 
 .cardImageContainer {
@@ -92,7 +93,7 @@
   font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
-  color: #1a202c;
+  color: #3a0f0f;
 }
 
 .cardExcerpt {
@@ -100,6 +101,7 @@
   margin-bottom: 1.5rem;
   line-height: 1.6;
   flex-grow: 1;
+  font-size: 1rem;
 }
 
 .cardMeta {
@@ -124,13 +126,13 @@
   border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 500;
-  background-color: #e6f0fd;
-  color: #3182ce;
+  background-color: #f5f2f2;
+  color: #3a0f0f;
   transition: background-color 0.2s ease;
 }
 
 .tag:hover {
-  background-color: #bfdbfe;
+  background-color: #d1c2c2;
 }
 
 /* Blog content styles */
@@ -149,7 +151,7 @@
   font-weight: 700;
   margin-bottom: 1.25rem;
   line-height: 1.3;
-  color: #1a202c;
+  color: #3a0f0f;
 }
 
 .blogMeta {
@@ -173,7 +175,7 @@
 
 .authorName {
   font-weight: 600;
-  color: #1a202c;
+  color: #3a0f0f;
 }
 
 .blogDate {
@@ -200,7 +202,7 @@
   font-size: 2.2rem;
   font-weight: 700;
   margin: 2rem 0 1.25rem;
-  color: #1a202c;
+  color: #3a0f0f;
   line-height: 1.3;
 }
 
@@ -208,7 +210,7 @@
   font-size: 1.8rem;
   font-weight: 700;
   margin: 1.75rem 0 1rem;
-  color: #1a202c;
+  color: #3a0f0f;
   line-height: 1.3;
 }
 
@@ -216,26 +218,28 @@
   font-size: 1.5rem;
   font-weight: 600;
   margin: 1.5rem 0 0.875rem;
-  color: #1a202c;
+  color: #3a0f0f;
   line-height: 1.3;
 }
 
 .blogBody p {
   margin-bottom: 1.25rem;
+  font-size: 1rem;
 }
 
 .blogBody ul, .blogBody ol {
   margin-bottom: 1.25rem;
   padding-left: 1.5rem;
+  font-size: 1rem;
 }
 
 .blogBody li {
   margin-bottom: 0.5rem;
-  font-size: 1.125rem;
+  font-size: 1rem;
 }
 
 .blogBody a {
-  color: #3182ce;
+  color: #3a0f0f;
   text-decoration: underline;
 }
 
@@ -244,12 +248,12 @@
 }
 
 .blogBody blockquote {
-  border-left: 4px solid #3182ce;
+  border-left: 4px solid #3a0f0f;
   padding: 1rem 1.5rem;
   font-style: italic;
   margin: 1.5rem 0;
   color: #4a5568;
-  background-color: #f7fafc;
+  background-color: #f5f2f2;
   border-radius: 0 0.5rem 0.5rem 0;
 }
 
@@ -278,14 +282,14 @@
   padding: 0.375rem 0.75rem;
   font-size: 0.875rem;
   border-radius: 9999px;
-  background-color: #edf2f7;
-  color: #4a5568;
+  background-color: #f5f2f2;
+  color: #3a0f0f;
   transition: all 0.2s ease;
 }
 
 .tag:hover {
-  background-color: #e2e8f0;
-  color: #2d3748;
+  background-color: #d1c2c2;
+  color: #3a0f0f;
 }
 
 .backButton {
@@ -294,12 +298,12 @@
   padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 500;
-  color: #4a5568;
+  color: #3a0f0f;
   transition: all 0.2s ease;
 }
 
 .backButton:hover {
-  color: #1a202c;
+  color: #5d2c2c;
 }
 
 .backIcon {
@@ -314,7 +318,7 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #1a202c;
+  color: #3a0f0f;
 }
 
 .shareButtons {
@@ -329,12 +333,12 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 9999px;
-  background-color: #f7fafc;
-  color: #4a5568;
+  background-color: #f5f2f2;
+  color: #3a0f0f;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .shareButton:hover {
-  background-color: #3182ce;
+  background-color: #3a0f0f;
   color: white;
 }

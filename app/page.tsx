@@ -1,42 +1,43 @@
-import Link from "next/link";
-import Hero from "./components/home/Hero";
-import ServicesOverview from "./components/home/ServicesOverview";
-import CTASection from "./components/home/CTASection";
-import VoiceflowChat from "./components/home/VoiceflowChat";
+import Image from 'next/image';
+import Hero from '@/app/components/home/Hero';
+import N8nChatSection from '@/app/components/home/N8nChatSection';
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <ServicesOverview />
-      <section className="py-16 bg-white dark:bg-gray-800">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Työmaa-assistentti</h2>
-            <p className="max-w-2xl mx-auto text-gray-600 dark:text-gray-300 mb-8">
-              Proovi meie tööplatsi assistenti, mis aitab sul hallata projekte ja automatiseerida töövooge.
-            </p>
-            
-            <Link 
-              href="/chat"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-all inline-block"
-            >
-              Proovi chat-assistenti
-            </Link>
-          </div>
-          
-          {/* Demo chat widget */}
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-blue-50 p-4 rounded-lg mb-8 text-center">
-              <p className="text-blue-700 font-medium">
-                Demo versioon - täisfunktsionaalsuse jaoks mine <Link href="/chat" className="text-blue-600 underline">chat lehele</Link>
+      
+      <N8nChatSection />
+      
+      <section className="py-20">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="p-6 bg-white rounded-lg shadow-md">
+              <h2 className="text-2xl font-bold mb-4">Tekoäly rakentamisessa</h2>
+              <p className="mb-4">
+                Hyödynnä tekoälyn tarjoamat mahdollisuudet rakennusprojekteissa. Automatisoi työtehtäviä ja paranna tehokkuutta.
               </p>
+              <a href="/palvelut/tekoaly-rakentaminen" className="text-primary-900 font-medium hover:underline">Lue lisää →</a>
             </div>
-            <VoiceflowChat />
+            
+            <div className="p-6 bg-white rounded-lg shadow-md">
+              <h2 className="text-2xl font-bold mb-4">Automaatio ja prosessit</h2>
+              <p className="mb-4">
+                Tehosta yrityksesi toimintaa automatisoimalla toistuvia prosesseja. Säästä aikaa ja resursseja älykkäillä ratkaisuilla.
+              </p>
+              <a href="/palvelut" className="text-primary-900 font-medium hover:underline">Lue lisää →</a>
+            </div>
+            
+            <div className="p-6 bg-white rounded-lg shadow-md">
+              <h2 className="text-2xl font-bold mb-4">Konsultointi</h2>
+              <p className="mb-4">
+                Asiantunteva konsultointimme auttaa sinua löytämään parhaat tekoälyratkaisut juuri sinun yrityksesi tarpeisiin.
+              </p>
+              <a href="/yhteystiedot" className="text-primary-900 font-medium hover:underline">Ota yhteyttä →</a>
+            </div>
           </div>
         </div>
       </section>
-      <CTASection />
     </>
   );
 }

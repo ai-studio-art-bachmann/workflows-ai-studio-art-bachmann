@@ -9,7 +9,7 @@
   font-size: 2.2rem;
   font-weight: 700;
   margin: 2rem 0 1.25rem;
-  color: #1a202c;
+  color: #3a0f0f;
   line-height: 1.3;
 }
 
@@ -17,7 +17,7 @@
   font-size: 1.8rem;
   font-weight: 700;
   margin: 1.75rem 0 1rem;
-  color: #1a202c;
+  color: #3a0f0f;
   line-height: 1.3;
 }
 
@@ -25,7 +25,7 @@
   font-size: 1.5rem;
   font-weight: 600;
   margin: 1.5rem 0 0.875rem;
-  color: #1a202c;
+  color: #3a0f0f;
   line-height: 1.3;
 }
 
@@ -33,7 +33,7 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin: 1.25rem 0 0.75rem;
-  color: #1a202c;
+  color: #3a0f0f;
   line-height: 1.3;
 }
 
@@ -47,12 +47,13 @@
 
 /* Lingid */
 .blog-link {
-  color: #3182ce;
+  color: #3a0f0f;
   text-decoration: underline;
 }
 
 .blog-link:hover {
   text-decoration: none;
+  color: #5d2c2c;
 }
 
 /* Loendid */
@@ -68,12 +69,12 @@
 
 /* Tsitaadid */
 .blog-blockquote {
-  border-left: 4px solid #3182ce;
+  border-left: 4px solid #3a0f0f;
   padding: 1rem 1.5rem;
   font-style: italic;
   margin: 1.5rem 0;
   color: #4a5568;
-  background-color: #f7fafc;
+  background-color: #f5f2f2;
   border-radius: 0 0.5rem 0.5rem 0;
 }
 
@@ -88,7 +89,7 @@
 /* Kood */
 .blog-code {
   font-family: monospace;
-  background-color: #f7fafc;
+  background-color: #f5f2f2;
   padding: 0.2em 0.4em;
   border-radius: 0.25rem;
   font-size: 0.875em;
@@ -96,7 +97,7 @@
 }
 
 .blog-pre {
-  background-color: #f7fafc;
+  background-color: #f5f2f2;
   padding: 1rem;
   border-radius: 0.5rem;
   overflow-x: auto;
@@ -119,7 +120,7 @@
 }
 
 .blog-table th {
-  background-color: #f7fafc;
+  background-color: #f5f2f2;
   padding: 0.75rem;
   text-align: left;
   font-weight: 600;
@@ -132,13 +133,13 @@
 }
 
 .blog-table tr:hover {
-  background-color: #f7fafc;
+  background-color: #f5f2f2;
 }
 
 /* Märkused ja hoiatused */
 .blog-note {
-  background-color: #ebf8ff;
-  border-left: 4px solid #4299e1;
+  background-color: #f5f2f2;
+  border-left: 4px solid #3a0f0f;
   padding: 1rem 1.5rem;
   margin: 1.5rem 0;
   border-radius: 0 0.5rem 0.5rem 0;
@@ -146,7 +147,7 @@
 
 .blog-warning {
   background-color: #fffaf0;
-  border-left: 4px solid #ed8936;
+  border-left: 4px solid #5d2c2c;
   padding: 1rem 1.5rem;
   margin: 1.5rem 0;
   border-radius: 0 0.5rem 0.5rem 0;
@@ -174,7 +175,7 @@
 
 .blog-author-name {
   font-weight: 600;
-  color: #1a202c;
+  color: #3a0f0f;
 }
 
 .blog-date {
@@ -195,14 +196,14 @@
   padding: 0.375rem 0.75rem;
   font-size: 0.875rem;
   border-radius: 9999px;
-  background-color: #edf2f7;
-  color: #4a5568;
+  background-color: #f5f2f2;
+  color: #3a0f0f;
   transition: all 0.2s ease;
 }
 
 .blog-tag:hover {
-  background-color: #e2e8f0;
-  color: #2d3748;
+  background-color: #d1c2c2;
+  color: #3a0f0f;
 }
 
 /* Nupud */
@@ -212,12 +213,15 @@
   padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 500;
-  color: #4a5568;
+  color: #3a0f0f;
   transition: all 0.2s ease;
+  background-color: #f5f2f2;
+  border-radius: 0.25rem;
 }
 
 .blog-button:hover {
-  color: #1a202c;
+  background-color: #d1c2c2;
+  color: #3a0f0f;
 }
 
 .blog-button-icon {
