@@ -12,6 +12,7 @@
   "dependencies": {
     "@auth/core": "^0.37.4",
     "@auth/nextjs": "^0.0.0-380f8d56",
+    "@netlify/plugin-nextjs": "^5.9.4",
     "gray-matter": "^4.0.3",
     "next": "14.2.23",
     "next-auth": "^4.24.11",

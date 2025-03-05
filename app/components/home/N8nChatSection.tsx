@@ -9,136 +9,115 @@ const N8nChatSection = () => {
     if (chatInitialized.current) return;
     chatInitialized.current = true;
 
-    // Load n8n Chat CSS
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css';
-    document.head.appendChild(link);
+    // Create a simple form for the chat
+    const chatContainer = document.getElementById('n8n-chat-embed');
+    if (chatContainer) {
+      chatContainer.innerHTML = `
+        <div style="height: 420px; display: flex; flex-direction: column; padding: 20px; background-color: white;">
+          <div style="background-color: #253a3e; padding: 15px; border-bottom: 1px solid #e5e7eb; color: white;">
+            <h3 style="margin: 0; font-size: calc(18px + 0.3rem); font-weight: 600;">Hei! 👋</h3>
+            <p style="margin: 10px 0 0; font-size: calc(14px + 0.3rem); color: #ffffff;">
+              Kysy tarkempia tietoja AI Studio Art Bachmannin palveluista, tekoälyratkaisuista ja niiden hyödyistä rakennusalalla. Tekoälyavustajamme tarjoaa kattavia vastauksia yrityksemme tietokannoista sekä reaaliaikaisia tutkimustietoja alan kehityksestä.
+            </p>
+          </div>
+          
+          <div style="flex: 1; overflow-y: auto; margin-bottom: 20px; padding: 10px; background-color: #f9f9f9;" id="chat-messages">
+            <div style="background-color: #f3f4f6; color: #1a2e36; padding: 12px; border-radius: 8px; margin-bottom: 10px; max-width: 80%; font-size: calc(1rem + 0.3rem);">
+              Nimeni on Art. Miten voin auttaa sinua tänään?
+            </div>
+          </div>
+          
+          <form id="chat-form" style="display: flex; gap: 10px;">
+            <textarea 
+              id="chat-input" 
+              placeholder="Kirjoita kysymyksesi..." 
+              style="flex: 1; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; resize: none; height: 50px; font-size: calc(1rem + 0.3rem);"
+            ></textarea>
+            <button 
+              type="submit" 
+              style="background-color: #253a3e; color: white; border: none; border-radius: 8px; padding: 0 20px; cursor: pointer;"
+            >
+              Lähetä
+            </button>
+          </form>
+        </div>
+      `;
 
-    // Custom CSS for n8n chat
-    const customStyle = document.createElement('style');
-    customStyle.textContent = `
-      .chat-message.chat-message-from-user:not(.chat-message-transparent) {
-        background-color: #253a3e !important;
-      }
-      #n8n-chat-embed > main > div.chat-header > p {
-        font-size: 1.1rem !important;
-      }
-      /* Additional selectors to ensure color change */
-      .n8n-chat-message-user {
-        background-color: #253a3e !important;
-      }
-      .chat-message-from-user {
-        background-color: #253a3e !important;
-      }
-      /* Override any inline styles */
-      [style*="background-color"] {
-        background-color: #253a3e !important;
-      }
-    `;
-    document.head.appendChild(customStyle);
+      // Add event listener to the form
+      const form = document.getElementById('chat-form');
+      const input = document.getElementById('chat-input');
+      const messagesContainer = document.getElementById('chat-messages');
 
-    // Load n8n Chat script
-    const script = document.createElement('script');
-    script.type = 'module';
-    script.textContent = `
-      import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
-      
-      createChat({
-        webhookUrl: 'https://joosep.app.n8n.cloud/webhook/2dbeb6d2-cc83-45fe-95ee-588bd59ccd72/chat',
-        target: '#n8n-chat-embed',
-        mode: 'fullscreen',
-        showWelcomeScreen: false,
-        initialMessages: [
-          'Nimeni on Art. Miten voin auttaa sinua tänään?'
-        ],
-        i18n: {
-          en: {
-            title: 'Hei! 👋',
-            subtitle: "Kysy tarkempia tietoja AI Studio Art Bachmannin palveluista, tekoälyratkaisuista ja niiden hyödyistä rakennusalalla. Tekoälyavustajamme tarjoaa kattavia vastauksia yrityksemme tietokannoista sekä reaaliaikaisia tutkimustietoja alan kehityksestä.",
-            getStarted: 'Uusi keskustelu',
-            inputPlaceholder: 'Kirjoita kysymyksesi...',
-          },
-        },
-        theme: {
-          chatWindow: {
-            backgroundColor: '#ffffff',
-            textColor: '#1a2e36',
-          },
-          userMessage: {
-            backgroundColor: '#253a3e',
-            textColor: '#ffffff',
-          },
-          botMessage: {
-            backgroundColor: '#f3f4f6',
-            textColor: '#1a2e36',
-          },
-          input: {
-            backgroundColor: '#ffffff',
-            textColor: '#1a2e36',
-            placeholderColor: '#9ca3af',
-            borderColor: '#e5e7eb',
-            focusBorderColor: '#1a2e36',
-          },
-          button: {
-            backgroundColor: '#253a3e', 
-            textColor: '#ffffff',
-          }
-        }
-      });
-
-      // Force style update after a short delay
-      setTimeout(() => {
-        // Apply color to all possible user message elements
-        document.querySelectorAll('.chat-message.chat-message-from-user:not(.chat-message-transparent), .n8n-chat-message-user, .chat-message-from-user').forEach(bubble => {
-          bubble.style.backgroundColor = '#253a3e';
-        });
-        
-        // Find subtitle element and increase font size
-        const subtitleEl = document.querySelector('#n8n-chat-embed > main > div.chat-header > p');
-        if (subtitleEl) {
-          subtitleEl.style.fontSize = '1.1rem';
-        }
-        
-        // Add mutation observer to catch dynamically added elements
-        const observer = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-            if (mutation.addedNodes.length) {
-              document.querySelectorAll('.chat-message.chat-message-from-user:not(.chat-message-transparent), .n8n-chat-message-user, .chat-message-from-user').forEach(bubble => {
-                bubble.style.backgroundColor = '#253a3e';
-              });
+      if (form && input && messagesContainer) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const message = (input as HTMLTextAreaElement).value.trim();
+          if (!message) return;
+          
+          // Add user message to chat
+          const userMessageEl = document.createElement('div');
+          userMessageEl.style.cssText = 'background-color: #253a3e; color: white; padding: 12px; border-radius: 8px; margin-bottom: 10px; margin-left: auto; max-width: 80%; font-size: calc(1rem + 0.3rem);';
+          userMessageEl.textContent = message;
+          messagesContainer.appendChild(userMessageEl);
+          
+          // Clear input
+          (input as HTMLTextAreaElement).value = '';
+          
+          try {
+            // Send message to webhook
+            const response = await fetch('https://art-bachmann1-agent.app.n8n.cloud/webhook-test/52398649-8e24-409e-b8cb-07ce1281f2c8', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ message }),
+            });
+            
+            if (response.ok) {
+              const data = await response.json();
+              
+              // Add bot response to chat
+              const botMessageEl = document.createElement('div');
+              botMessageEl.style.cssText = 'background-color: #f3f4f6; color: #1a2e36; padding: 12px; border-radius: 8px; margin-bottom: 10px; max-width: 80%; font-size: calc(1rem + 0.3rem);';
+              botMessageEl.textContent = data.response || 'Kiitos viestistäsi. Palaan asiaan pian.';
+              messagesContainer.appendChild(botMessageEl);
+            } else {
+              // Add error message
+              const errorMessageEl = document.createElement('div');
+              errorMessageEl.style.cssText = 'background-color: #f3f4f6; color: #1a2e36; padding: 12px; border-radius: 8px; margin-bottom: 10px; max-width: 80%; font-size: calc(1rem + 0.3rem);';
+              errorMessageEl.textContent = 'Pahoittelut, viestin lähettämisessä tapahtui virhe. Yritä myöhemmin uudelleen.';
+              messagesContainer.appendChild(errorMessageEl);
             }
-          });
+          } catch (error) {
+            console.error('Error sending message:', error);
+            
+            // Add error message
+            const errorMessageEl = document.createElement('div');
+            errorMessageEl.style.cssText = 'background-color: #f3f4f6; color: #1a2e36; padding: 12px; border-radius: 8px; margin-bottom: 10px; max-width: 80%; font-size: calc(1rem + 0.3rem);';
+            errorMessageEl.textContent = 'Pahoittelut, viestin lähettämisessä tapahtui virhe. Yritä myöhemmin uudelleen.';
+            messagesContainer.appendChild(errorMessageEl);
+          }
+          
+          // Scroll to bottom
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
         });
-        
-        // Start observing the chat container
-        const chatContainer = document.querySelector('#n8n-chat-embed');
-        if (chatContainer) {
-          observer.observe(chatContainer, { childList: true, subtree: true });
-        }
-      }, 1000);
-    `;
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(link);
-      document.head.removeChild(customStyle);
-      document.head.removeChild(script);
-    };
+      }
+    }
   }, []);
 
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center mb-10">
-          <h2 className="text-3xl font-bold mb-4">Kysy meiltä tekoälyratkaisuista</h2>
-          <p className="text-lg text-gray-600 mb-6">
+          <h2 className="text-3xl font-bold mb-4" style={{ fontSize: 'calc(1.875rem + 0.3rem)' }}>Kysy meiltä tekoälyratkaisuista</h2>
+          <p className="text-lg text-gray-600 mb-6" style={{ fontSize: 'calc(1.125rem + 0.3rem)' }}>
             Käytä alla olevaa chat-työkalua saadaksesi vastauksia kysymyksiisi tekoälystä ja sen hyödyntämisestä rakennusalalla.
           </p>
         </div>
         
         <div className="max-w-3xl mx-auto">
-          <div id="n8n-chat-embed" className="h-[320px] border rounded-lg shadow-lg bg-white"></div>
+          <div id="n8n-chat-embed" className="border rounded-lg shadow-lg"></div>
         </div>
       </div>
     </section>

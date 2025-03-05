@@ -3,7 +3,7 @@ import PageHero from "@/app/components/common/PageHero";
 
 export const metadata: Metadata = {
   title: "Yhteystiedot | AI Studio Art Bachmann",
-  description: "Ota yhteyttä AI Studio Art Bachmanniin. Vastaamme mielellämme kysymyksiisi tekoälyratkaisuista ja automatisoiduista järjestelmistä.",
+  description: "Ota yhteyttä ja keskustellaan AI agenttien tulevaisuuden mahdollisuuksista rakennusalalla. Valmistaudu tulevaisuuteen jo nyt.",
   alternates: {
     canonical: '/yhteystiedot',
   },
@@ -13,17 +13,17 @@ export default function ContactPage() {
   return (
     <>
       <PageHero 
-        title="Yhteystiedot"
-        description="Ota yhteyttä meihin ja keskustellaan, miten voimme auttaa rakennusyritystäsi hyödyntämään tekoälyn mahdollisuuksia."
+        title="Ota yhteyttä"
+        description="Kiinnostaako AI agenttien tulevaisuus rakennusalalla? Ota yhteyttä ja keskustellaan, miten voit valmistautua tulevaisuuden muutoksiin jo nyt."
       />
 
       <section className="py-16 md:py-24 bg-white dark:bg-gray-800">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-              <h2 className="mb-6">Ota yhteyttä</h2>
+              <h2 className="mb-6">Keskustellaan AI agenttien mahdollisuuksista</h2>
               <p className="mb-8 text-gray-600 dark:text-gray-300">
-                Täytä lomake, niin otamme sinuun yhteyttä mahdollisimman pian. Voit myös soittaa tai lähettää sähköpostia suoraan alla oleviin yhteystietoihin.
+                Olemme AI Studio Art Bachmannilla sitoutuneet jakamaan tietoa AI agenttien tulevaisuuden mahdollisuuksista rakennusalalla. Täytä lomake, niin otamme sinuun yhteyttä keskustellaksemme, miten voit valmistautua tulevaisuuden muutoksiin.
               </p>
               
               <div className="mb-8">
@@ -104,7 +104,7 @@ export default function ContactPage() {
                     id="message" 
                     rows={5} 
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-white" 
-                    placeholder="Kirjoita viestisi tähän..."
+                    placeholder="Kerro, miten AI agentit kiinnostavat sinua ja yrityksesi toimintaa..."
                     required
                   ></textarea>
                 </div>

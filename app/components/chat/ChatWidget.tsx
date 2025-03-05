@@ -13,7 +13,7 @@ const ChatWidget: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // API endpoint for chat
-  const CHAT_API_URL = "/api/chat";
+  const CHAT_API_URL = "https://art-bachmann1-agent.app.n8n.cloud/webhook-test/chat-webhook";
 
   // Test connection on component mount
   useEffect(() => {
@@ -22,7 +22,7 @@ const ChatWidget: React.FC = () => {
         // Lisame süsteemi tervitussõnumi kohe
         const welcomeMessage: ChatMessage = { 
           sender: "system", 
-          text: "Hei, kuidas läheb? Kuidas saan sind täna aidata?" 
+          text: "Hei, miten menee? Miten voin auttaa sinua tänään?" 
         };
         setMessages([welcomeMessage]);
 
@@ -105,7 +105,7 @@ const ChatWidget: React.FC = () => {
       } else if (typeof responseData === 'string') {
         responseText = responseData;
       } else {
-        responseText = "Sain teie sõnumi kätte, aga ei saanud vastust formaadis, mida ma mõistan.";
+        responseText = "Sain viestisi, mutta en ymmärtänyt vastausta muodossa, jota ymmärrän.";
       }
       
       // Add the system message
@@ -119,7 +119,7 @@ const ChatWidget: React.FC = () => {
       // Always provide a response to user
       const errorMsg: ChatMessage = { 
         sender: "system", 
-        text: "⚠️ Viga sõnumi saatmisel, kuid teie sõnum on salvestatud. Proovime sellega tegeleda." 
+        text: "⚠️ Virhe viestin lähettämisessä, mutta viestisi on tallennettu. Yritämme käsitellä sitä." 
       };
       setMessages((msgs) => [...msgs, errorMsg]);
     } finally {
@@ -129,14 +129,14 @@ const ChatWidget: React.FC = () => {
 
   return (
     <div className="chat-widget border rounded-lg shadow-lg bg-white overflow-hidden max-w-md w-full">
-      <div className="bg-blue-600 text-white p-3 flex justify-between items-center">
+      <div className="bg-[#41575C] text-white p-3 flex justify-between items-center">
         <h3 className="font-medium">Työmaa-assistentti</h3>
       </div>
       
       <div className="messages p-4 h-80 overflow-y-auto flex flex-col space-y-3">
         {messages.length === 0 ? (
           <div className="text-gray-400 text-center my-auto">
-            Küsi minult midagi tööga seotud või anna käsklusi.
+            Kysy minulta jotain työhön liittyvää tai anna komentoja.
           </div>
         ) : (
           messages.map((msg, idx) => (
@@ -176,7 +176,7 @@ const ChatWidget: React.FC = () => {
           <input 
             type="text" 
             value={input} 
-            placeholder="Kirjoita komento..." 
+            placeholder="Kirjoita viesti..." 
             onChange={(e) => setInput(e.target.value)} 
             className="flex-grow p-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             disabled={isLoading}
@@ -184,7 +184,7 @@ const ChatWidget: React.FC = () => {
           <button 
             type="submit"
             disabled={isLoading || !input.trim()} 
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-md disabled:bg-blue-300 transition-colors"
+            className="bg-[#41575C] hover:bg-[#344548] text-white px-4 py-2 rounded-r-md disabled:bg-gray-400 transition-colors"
           >
             Lähetä
           </button>

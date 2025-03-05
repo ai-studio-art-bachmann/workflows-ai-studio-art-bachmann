@@ -11,7 +11,7 @@ const Hero = () => {
           fill 
           style={{ 
             objectFit: 'cover',
-            objectPosition: 'left center'
+            objectPosition: 'right center'
           }}
           priority
         />
@@ -28,12 +28,12 @@ const Hero = () => {
           </h1>
           
           <p className="mb-10 text-lg md:text-xl text-gray-200 max-w-2xl">
-            Tehosta rakennusyrityksesi toimintaa innovatiivisilla tekoälyratkaisuilla ja automatisoiduilla järjestelmillä.
+            Tutustu AI agenttien mullistaviin mahdollisuuksiin rakennusalalla. Valmistaudu tulevaisuuteen, jossa älykkäät avustajat tekevät työstäsi tehokkaampaa ja mielekkäämpää.
           </p>
           
           <div className="flex flex-wrap gap-5">
-            <Link href="/yhteystiedot" className="button-outline border-white text-white hover:bg-white/10 transition-colors px-4 py-2 rounded-md" style={{ fontSize: '1.5rem' }}>
-              Tutustu palveluihin
+            <Link href="/palvelut" className="button-outline border-white text-white hover:text-black hover:bg-[#929A97] transition-colors px-4 py-2 rounded-md" style={{ fontSize: '1.5rem' }}>
+              Tutustu AI agentteihin
             </Link>
           </div>
         </div>
