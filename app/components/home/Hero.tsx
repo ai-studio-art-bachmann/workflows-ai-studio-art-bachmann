@@ -27,7 +27,7 @@ const Hero = () => {
             Tekoälyratkaisut rakennusyrityksille
           </h1>
           
-          <p className="mb-10 text-lg md:text-xl text-gray-200 max-w-2xl">
+          <p className="mb-10 text-lg md:text-xl text-gray-200 max-w-2xl" style={{ fontSize: 'calc(1.125rem + 0.3rem)' }}>
             Tutustu AI agenttien mullistaviin mahdollisuuksiin rakennusalalla. Valmistaudu tulevaisuuteen, jossa älykkäät avustajat tekevät työstäsi tehokkaampaa ja mielekkäämpää.
           </p>
           
