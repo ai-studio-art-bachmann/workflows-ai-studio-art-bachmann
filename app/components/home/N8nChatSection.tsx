@@ -17,14 +17,12 @@ const N8nChatSection = () => {
           <div style="background-color: #253a3e; padding: 15px; border-bottom: 1px solid #e5e7eb; color: white;">
             <h3 style="margin: 0; font-size: calc(18px + 0.3rem); font-weight: 600;">Hei! 👋</h3>
             <p style="margin: 10px 0 0; font-size: calc(14px + 0.3rem); color: #ffffff;">
-              Kysy tarkempia tietoja AI Studio Art Bachmannin palveluista, tekoälyratkaisuista ja niiden hyödyistä rakennusalalla. Tekoälyavustajamme tarjoaa kattavia vastauksia yrityksemme tietokannoista sekä reaaliaikaisia tutkimustietoja alan kehityksestä.
+              <strong>AI Studio Art Bachmann – Tekoälytransformaation kumppani rakennusyrityksille</strong><br>
+              Kysy minulta lisää tekoälyn mahdollisuuksista rakennusalalla. Vastaan kysymyksiisi konkreettisin esimerkein ja viimeisimmän tutkimustiedon pohjalta.
             </p>
           </div>
           
           <div style="flex: 1; overflow-y: auto; margin-bottom: 20px; padding: 10px; background-color: #f9f9f9;" id="chat-messages">
-            <div style="background-color: #f3f4f6; color: #1a2e36; padding: 12px; border-radius: 8px; margin-bottom: 10px; max-width: 80%; font-size: calc(1rem + 0.3rem);">
-              Nimeni on Art. Miten voin auttaa sinua tänään?
-            </div>
           </div>
           
           <form id="chat-form" style="display: flex; gap: 10px;">
@@ -112,7 +110,8 @@ const N8nChatSection = () => {
         <div className="max-w-4xl mx-auto text-center mb-10">
           <h2 className="text-3xl font-bold mb-4" style={{ fontSize: 'calc(1.875rem + 0.3rem)' }}>Kysy meiltä tekoälyratkaisuista</h2>
           <p className="text-lg text-gray-600 mb-6" style={{ fontSize: 'calc(1.125rem + 0.3rem)' }}>
-            Käytä alla olevaa chat-työkalua saadaksesi vastauksia kysymyksiisi tekoälystä ja sen hyödyntämisestä rakennusalalla.
+            Testaa tekoälyagenttia interaktiivisesti alla olevalla chat-työkalulla.
+Voit toteuttaa vastaavan tekoälyratkaisun juuri sinun käyttämissäsi kanavissa – esimerkiksi Telegramissa, Slackissa, Discordissa, Facebook Messengerissä tai missä tahansa muussa ympäristössä.
           </p>
         </div>
         
