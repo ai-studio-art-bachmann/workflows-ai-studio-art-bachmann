@@ -7,7 +7,10 @@ import ChatWidget from "../components/chat/ChatWidget";
 import Link from "next/link";
 
 export default function Dashboard() {
-  const { data: session, status } = useSession();
+  // Kasutame nullish coalescing operaatorit, et vältida undefined väärtuse destruktureerimist
+  const session = useSession();
+  const status = session?.status || "loading";
+  const userData = session?.data;
   const router = useRouter();
 
   useEffect(() => {
@@ -24,14 +27,14 @@ export default function Dashboard() {
     );
   }
 
-  if (!session) {
+  if (!userData) {
     return null; // Will redirect in useEffect
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-        <h1 className="text-2xl font-bold mb-2">Tervetuloa, {session.user?.name}</h1>
+        <h1 className="text-2xl font-bold mb-2">Tervetuloa, {userData.user?.name}</h1>
         <p className="text-gray-600">Hallintapaneelisi on nyt käytettävissä. Käytä chat-työkalua työnkulkujen hallintaan.</p>
       </div>
 

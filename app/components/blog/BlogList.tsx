@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { BlogPost } from '@/types/blog';
+import { BlogPost } from '@/app/lib/mdx';
 import BlogCard from './BlogCard';
 import Link from 'next/link';
 import Image from 'next/image';

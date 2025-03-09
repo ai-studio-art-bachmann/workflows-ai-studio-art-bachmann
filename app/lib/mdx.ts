@@ -9,6 +9,7 @@ const BLOG_DIR = path.join(process.cwd(), 'content', 'blog');
 
 // Blogi postituse tüüp
 export interface BlogPost {
+  id: string;
   slug: string;
   title: string;
   excerpt: string;
@@ -67,25 +68,46 @@ export function getBlogSlugs(): string[] {
 
 // Funktsioon kõigi blogide metaandmete saamiseks
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
-  // Kasutame Node.js fs moodulit ainult serveripoolses koodis
-  if (typeof window === 'undefined') {
-    try {
-      const slugs = getBlogSlugs();
-      const posts = await Promise.all(
-        slugs.map(async (slug) => {
-          const post = await getBlogPostBySlug(slug);
-          return post;
-        })
-      );
-
-      // Sorteeri postitused kuupäeva järgi (uuemad eespool)
-      return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-    } catch (error) {
-      console.error('Error getting all blog posts:', error);
+  try {
+    if (typeof window !== 'undefined') {
+      // Kliendipoolne kood - tagastame tühja massiivi
       return [];
     }
+
+    const slugs = getBlogSlugs();
+    const posts = await Promise.all(
+      slugs.map(async (slug) => {
+        const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
+        const fileContents = fs.readFileSync(filePath, 'utf8');
+        const { data, content } = matter(fileContents);
+        
+        // Arvutame lugemisaja
+        const readingTime = calculateReadingTime(content);
+        
+        return {
+          id: slug,
+          slug,
+          title: data.title || 'Pealkiri puudub',
+          excerpt: data.excerpt || 'Kokkuvõte puudub',
+          date: data.date || new Date().toISOString(),
+          content,
+          coverImage: data.coverImage || '/images/blog/default.jpg',
+          author: {
+            name: data.author?.name || 'Tundmatu autor',
+            image: data.author?.image || '/images/authors/default.jpg',
+          },
+          tags: data.tags || [],
+          readingTime,
+        };
+      })
+    );
+    
+    // Sorteerime postitused kuupäeva järgi, uuemad eespool
+    return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  } catch (error) {
+    console.error('Error getting all blog posts:', error);
+    return [];
   }
-  return [];
 }
 
 // Funktsioon blogi metaandmete saamiseks slugi järgi
@@ -159,6 +181,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost> {
       };
       
       return {
+        id: data.id || slug,
         slug: data.slug || slug,
         title: data.title || 'Pealkiri puudub',
         excerpt,
@@ -172,6 +195,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost> {
     } catch (error) {
       console.error(`Error getting blog post by slug ${slug}:`, error);
       return {
+        id: '',
         slug: '',
         title: '',
         excerpt: '',
@@ -189,6 +213,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost> {
   
   // Tagastame tühja objekti kliendipoolses koodis
   return {
+    id: '',
     slug: '',
     title: '',
     excerpt: '',
