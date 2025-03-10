@@ -13,7 +13,7 @@ const Header = () => {
 
   const navigation = [
     { name: 'Etusivu', href: '/' },
-    { name: 'Työmaa-assistentti', href: '/playground' },
+    { name: 'Leikkikenttä', href: '/playground' },
     { name: 'Blogi', href: 'https://testing-1.ai-studio-art-bachmann.fi' },
     { name: 'Yhteystiedot', href: '/yhteystiedot' },
     { name: 'Test', href: '/test' },

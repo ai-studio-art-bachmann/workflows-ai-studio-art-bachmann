@@ -11,6 +11,7 @@ const ChatWidget: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [feedback, setFeedback] = useState<null | boolean>(null);
 
   // API endpoint for chat
   const CHAT_API_URL = "https://art-bachmann1-agent.app.n8n.cloud/webhook-test/chat-webhook";
@@ -22,7 +23,7 @@ const ChatWidget: React.FC = () => {
         // Lisame süsteemi tervitussõnumi kohe
         const welcomeMessage: ChatMessage = { 
           sender: "system", 
-          text: "Hei, miten menee? Miten voin auttaa sinua tänään?" 
+          text: "Hei! 👋 Olen AI-agenttisi. Syötä projektisi tiedot tai kysy vapaasti, miten tekoäly voi auttaa aikataulutuksessa, materiaalien optimoinnissa tai riskienhallinnassa. Näytän sinulle konkreettiset ratkaisut välittömästi!" 
         };
         setMessages([welcomeMessage]);
 
@@ -127,13 +128,19 @@ const ChatWidget: React.FC = () => {
     }
   };
 
+  const handleFeedback = async (isPositive: boolean) => {
+    setFeedback(isPositive);
+    // Tässä voisi lähettää palautteen n8n-työnkulkuun
+    console.log(`User gave ${isPositive ? 'positive' : 'negative'} feedback`);
+  };
+
   return (
-    <div className="chat-widget border rounded-lg shadow-lg bg-white overflow-hidden max-w-md w-full">
-      <div className="bg-[#41575C] text-white p-3 flex justify-between items-center">
+    <div className="chat-widget border rounded-lg shadow-lg bg-white overflow-hidden w-full" style={{ minWidth: '50vw' }}>
+      <div className="bg-[#0D1B2A] text-white p-3 flex justify-between items-center">
         <h3 className="font-medium">Työmaa-assistentti</h3>
       </div>
       
-      <div className="messages p-4 h-80 overflow-y-auto flex flex-col space-y-3">
+      <div className="messages p-4 h-96 overflow-y-auto flex flex-col space-y-3">
         {messages.length === 0 ? (
           <div className="text-gray-400 text-center my-auto">
             Kysy minulta jotain työhön liittyvää tai anna komentoja.
@@ -184,11 +191,35 @@ const ChatWidget: React.FC = () => {
           <button 
             type="submit"
             disabled={isLoading || !input.trim()} 
-            className="bg-[#41575C] hover:bg-[#344548] text-white px-4 py-2 rounded-r-md disabled:bg-gray-400 transition-colors"
+            className="bg-[#00aaff] hover:bg-[#0088cc] text-white px-4 py-2 rounded-r-md disabled:bg-gray-400 transition-colors"
           >
             Lähetä
           </button>
         </form>
+        
+        {messages.length > 1 && (
+          <div className="mt-4 text-center">
+            <p className="text-sm text-gray-600 mb-2">Oliko tästä apua?</p>
+            <div className="flex justify-center space-x-4">
+              <button 
+                onClick={() => handleFeedback(true)}
+                className={`px-3 py-1 rounded-md transition-colors ${
+                  feedback === true ? 'bg-green-500 text-white' : 'bg-gray-100 hover:bg-gray-200'
+                }`}
+              >
+                👍 Kyllä
+              </button>
+              <button 
+                onClick={() => handleFeedback(false)}
+                className={`px-3 py-1 rounded-md transition-colors ${
+                  feedback === false ? 'bg-red-500 text-white' : 'bg-gray-100 hover:bg-gray-200'
+                }`}
+              >
+                👎 Ei
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
